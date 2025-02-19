@@ -501,13 +501,7 @@ namespace chaiscript {
       }
 
       Boxed_Value eval_internal(const chaiscript::detail::Dispatch_State &t_ss) const override {
-        const std::string &idname = [&]() -> const std::string & {
-          if (this->children[0]->identifier == AST_Node_Type::Reference) {
-            return this->children[0]->children[0]->text;
-          } else {
-            return this->children[0]->text;
-          }
-        }();
+        const std::string &idname = (this->children[0]->identifier == AST_Node_Type::Reference) ? this->children[0]->children[0]->text : this->children[0]->text;
 
         return t_ss->add_global_no_throw(Boxed_Value(), idname);
       }
