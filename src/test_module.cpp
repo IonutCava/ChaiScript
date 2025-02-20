@@ -5,30 +5,30 @@
 
 class TestBaseType {
 public:
-  TestBaseType()
+  TestBaseType() noexcept
       : val(10)
       , const_val(15)
       , mdarray{} {
   }
-  TestBaseType(int)
+  TestBaseType(int) noexcept
       : val(10)
       , const_val(15)
       , mdarray{} {
   }
-  TestBaseType(int *)
+  TestBaseType(int *) noexcept
       : val(10)
       , const_val(15)
       , mdarray{} {
   }
 
-  TestBaseType(const TestBaseType &other)
+  TestBaseType(const TestBaseType &other) noexcept
       : val(other.val)
       , const_val(other.const_val)
       , const_val_ptr(&const_val)
       , func_member(other.func_member) {
   }
 
-  TestBaseType(TestBaseType &&other)
+  TestBaseType(TestBaseType &&other) noexcept
       : val(other.val)
       , const_val(other.const_val)
       , const_val_ptr(&const_val)
@@ -59,7 +59,7 @@ public:
 
 class Type2 {
 public:
-  Type2(TestBaseType t_bt)
+  Type2(TestBaseType t_bt) noexcept
       : m_bt(std::move(t_bt))
       , m_str("Hello World") {
   }

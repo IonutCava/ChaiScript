@@ -31,7 +31,7 @@ namespace chaiscript {
     /// structure which holds the internal state of a Boxed_Value
     /// \todo Get rid of Any and merge it with this, reducing an allocation in the process
     struct Data {
-      Data(const Type_Info &ti, chaiscript::detail::Any to, bool is_ref, const void *t_void_ptr, bool t_return_value)
+      Data(const Type_Info &ti, chaiscript::detail::Any to, bool is_ref, const void *t_void_ptr, bool t_return_value) noexcept
           : m_type_info(ti)
           , m_obj(std::move(to))
           , m_data_ptr(ti.is_const() ? nullptr : const_cast<void *>(t_void_ptr))
