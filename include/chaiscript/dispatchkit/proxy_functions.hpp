@@ -20,6 +20,7 @@
 #include <vector>
 
 #include "../chaiscript_defines.hpp"
+#include "../language/chaiscript_ast_node.hpp"
 #include "boxed_cast.hpp"
 #include "boxed_value.hpp"
 #include "dynamic_object.hpp"
