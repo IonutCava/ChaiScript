@@ -73,9 +73,17 @@ namespace chaiscript {
         }
 
         if (t_locals) {
-          for (const auto &[name, value] : *t_locals) {
-            state.add_object(name, value);
-          }
+          #if 0
+            for (const auto &[name, value] : *t_locals) {
+              state.add_object(name, value);
+            }
+          #else
+            for (const auto &entry : *t_locals) {
+              // avoid binding a reference to the map node memory (can trigger sanitizer misaligned-ref)
+              const Boxed_Value value_copy = entry.second; // copy into properly aligned local storage
+              state.add_object(entry.first, value_copy);
+            }
+          #endif
         }
 
         for (size_t i = 0; i < t_param_names.size(); ++i) {
